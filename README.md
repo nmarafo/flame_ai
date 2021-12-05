@@ -11,7 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-This library tries to adapt gdx-ai to dart language to be used in [flame-engine](https://github.com/flame-engine/flame)
+This library tries to adapt [gdx-ai](https://github.com/libgdx/gdx-ai) to dart language to be used in [flame-engine](https://github.com/flame-engine/flame)
 
 ## Features
 
