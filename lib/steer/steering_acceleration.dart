@@ -7,11 +7,11 @@
  * @author davebaol */
 import 'dart:math';
 
-import 'package:flame/extensions.dart';
+import 'package:flame_ai/utils/vector_ai.dart';
 
-class SteeringAcceleration extends Vector2 {
+class SteeringAcceleration extends VectorAI {
   /* The linear component of this steering acceleration. */
-  late Vector2 linear;
+  late VectorAI linear;
 
   /* The angular component of this steering acceleration. */
   late double angular;
@@ -19,18 +19,15 @@ class SteeringAcceleration extends Vector2 {
   /* Creates a {@code SteeringAcceleration} with the given linear acceleration and zero angular acceleration.
    *
    * @param linear The initial linear acceleration to give this SteeringAcceleration. */
-
-  factory SteeringAcceleration (Vector2 linear) =>
-      SteeringAcceleration(linear)
-        ..angular=0;
+  SteeringAcceleration (this.linear) {
+    angular=0;
+  }
 
   /* Creates a {@code SteeringAcceleration} with the given linear and angular components.
    *
    * @param linear The initial linear acceleration to give this SteeringAcceleration.
    * @param angular The initial angular acceleration to give this SteeringAcceleration. */
-  factory SteeringAcceleration.linearAndAngular (Vector2 linear, double angular) =>
-      SteeringAcceleration(linear)
-        ..angular=angular;
+  SteeringAcceleration.linearAndAngular (this.linear, this.angular);
 
   /* Returns {@code true} if both linear and angular components of this steering acceleration are zero; {@code false} otherwise. */
   bool isZero () {
@@ -49,7 +46,7 @@ class SteeringAcceleration extends Vector2 {
    *
    * @param steering the steering acceleration
    * @return this steering acceleration for chaining */
-  SteeringAcceleration addSteeringAcceleration (SteeringAcceleration steering) {
+  SteeringAcceleration addSteering (SteeringAcceleration steering) {
     linear.add(steering.linear);
     angular += steering.angular;
     return this;
@@ -60,7 +57,7 @@ class SteeringAcceleration extends Vector2 {
    * @param scalar the scalar
    * @return this steering acceleration for chaining */
   SteeringAcceleration scl (double scalar) {
-    linear.scaled(scalar);
+    linear.scale(scalar);
     angular *= scalar;
     return this;
   }
@@ -71,7 +68,6 @@ class SteeringAcceleration extends Vector2 {
    * @param scalar the scalar
    * @return this steering acceleration for chaining */
   SteeringAcceleration mulAdd (SteeringAcceleration steering, double scalar) {
-    //Vector+double
     linear.scaleOrthogonalInto(scalar,steering.linear);
     angular += steering.angular * scalar;
     return this;

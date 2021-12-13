@@ -5,9 +5,9 @@
  * @author davebaol */
 
 
-import 'package:flame/extensions.dart';
+import 'package:flame_ai/utils/vector_ai.dart';
 
-abstract class Location implements Vector2 {
+abstract class Location extends VectorAI {
 
 /* Returns the vector indicating the position of this location. */
 getPosition ();
@@ -22,13 +22,13 @@ void setOrientation (double orientation);
 
 /* Returns the angle in radians pointing along the specified vector.
  * @param vector the vector */
-double vectorToAngle (Vector2 vector);
+double vectorToAngle (VectorAI vector);
 
 /* Returns the unit vector in the direction of the specified angle expressed in radians.
  * @param outVector the output vector.
  * @param angle the angle in radians.
  * @return the output vector for chaining. */
-Vector2? angleToVector (Vector2 outVector, double angle);
+VectorAI? angleToVector (VectorAI outVector, double angle);
 
 /* Creates a new location.
  * <p>

@@ -7,13 +7,13 @@
  *
  * @author davebaol */
 
-import 'package:flame/extensions.dart';
 import 'package:flame_ai/utils/location.dart';
+import 'package:flame_ai/utils/vector_ai.dart';
 import 'limiter.dart';
 
-abstract class Steerable implements Vector2,Location,Limiter {
+abstract class Steerable extends VectorAI implements Location,Limiter {
 /* Returns the vector indicating the linear velocity of this Steerable. */
-Vector2? getLinearVelocity ();
+VectorAI? getLinearVelocity ();
 
 /* Returns the float value indicating the the angular velocity in radians of this Steerable. */
 double getAngularVelocity ();

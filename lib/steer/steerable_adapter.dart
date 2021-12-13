@@ -4,11 +4,11 @@
  * @param <T> Type of vector, either 2D or 3D, implementing the {@link Vector} interface
  *
  * @author davebaol */
-import 'package:flame/extensions.dart';
 import 'package:flame_ai/steer/steerable.dart';
 import 'package:flame_ai/utils/location.dart';
+import 'package:flame_ai/utils/vector_ai.dart';
 
-class SteerableAdapter extends Vector2 implements Steerable {
+class SteerableAdapter extends VectorAI implements Steerable {
   factory SteerableAdapter()=>SteerableAdapter();
 
   @override
@@ -57,7 +57,7 @@ class SteerableAdapter extends Vector2 implements Steerable {
   }
 
   @override
-  Vector2? getPosition () {
+  VectorAI? getPosition () {
     return null;
   }
 
@@ -71,7 +71,7 @@ class SteerableAdapter extends Vector2 implements Steerable {
   }
 
   @override
-  Vector2? getLinearVelocity () {
+  VectorAI? getLinearVelocity () {
     return null;
   }
 
@@ -100,12 +100,12 @@ class SteerableAdapter extends Vector2 implements Steerable {
   }
 
   @override
-  double vectorToAngle (Vector2 vector) {
+  double vectorToAngle (VectorAI vector) {
     return 0;
   }
 
   @override
-  Vector2? angleToVector (Vector2 outVector, double angle) {
+  VectorAI? angleToVector (VectorAI outVector, double angle) {
     return null;
   }
 

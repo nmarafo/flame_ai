@@ -1,22 +1,21 @@
-
 /* A {@code SteeringBehavior} calculates the linear and/or angular accelerations to be applied to its owner.
  *
  * @param <T> Type of vector, either 2D or 3D, implementing the {@link Vector} interface
  *
  * @author davebaol */
-import 'package:flame/extensions.dart';
 import 'package:flame_ai/steer/limiter.dart';
 import 'package:flame_ai/steer/steerable.dart';
 import 'package:flame_ai/steer/steering_acceleration.dart';
 import 'package:flame_ai/utils/location.dart';
+import 'package:flame_ai/utils/vector_ai.dart';
 
-abstract class SteeringBehavior extends Vector2 {
+abstract class SteeringBehavior extends VectorAI {
 
   /* The owner of this steering behavior */
   late Steerable owner;
 
   /* The limiter of this steering behavior */
-  Limiter? limiter;
+  late Limiter limiter;
 
   /* A flag indicating whether this steering behavior is enabled or not. */
   late bool enabled;
@@ -25,39 +24,34 @@ abstract class SteeringBehavior extends Vector2 {
    * that the owner is used instead.
    *
    * @param owner the owner of this steering behavior */
-  factory SteeringBehavior (Steerable owner) =>
-      SteeringBehavior(owner)
-        ..limiter=null
-        ..enabled=true;
+  SteeringBehavior (this.owner) {
+    limiter!=null;
+    enabled=true;
+  }
 
   /* Creates a {@code SteeringBehavior} for the specified owner and limiter. The behavior is enabled.
    *
    * @param owner the owner of this steering behavior
    * @param limiter the limiter of this steering behavior */
-  factory SteeringBehavior.ownerAndLimiter (Steerable owner, Limiter limiter) =>
-      SteeringBehavior(owner)
-        ..limiter=limiter
-        ..enabled=true;
+  SteeringBehavior.ownerAndLimiter (this.owner, this.limiter) {
+    enabled=true;
+  }
 
   /* Creates a {@code SteeringBehavior} for the specified owner and activation flag. The behavior has no explicit limiter,
    * meaning that the owner is used instead.
    *
    * @param owner the owner of this steering behavior
    * @param enabled a flag indicating whether this steering behavior is enabled or not */
-  factory SteeringBehavior.ownerAndEnabled (Steerable owner, bool enabled) =>
-      SteeringBehavior(owner)
-        ..limiter=null
-        ..enabled=enabled;
+  SteeringBehavior.ownerAndEnabled (this.owner, this.enabled) {
+    limiter!=null;
+  }
 
   /* Creates a {@code SteeringBehavior} for the specified owner, limiter and activation flag.
    *
    * @param owner the owner of this steering behavior
    * @param limiter the limiter of this steering behavior
    * @param enabled a flag indicating whether this steering behavior is enabled or not */
-  factory SteeringBehavior.ownerLimitedEnabled (Steerable owner, Limiter limiter, bool enabled) =>
-      SteeringBehavior(owner)
-        ..limiter=limiter
-        ..enabled=enabled;
+  SteeringBehavior.ownerAndLimiterAndEnabled (this.owner, this.limiter, this.enabled);
 
   /* If this behavior is enabled calculates the steering acceleration and writes it to the given steering output. If it is
    * disabled the steering output is set to zero.
@@ -88,7 +82,7 @@ abstract class SteeringBehavior extends Vector2 {
 
   /* Returns the limiter of this steering behavior. */
   Limiter getLimiter () {
-    return limiter!;
+    return limiter;
   }
 
   /* Sets the limiter of this steering behavior.
@@ -112,7 +106,7 @@ abstract class SteeringBehavior extends Vector2 {
 
   /* Returns the actual limiter of this steering behavior. */
   Limiter getActualLimiter () {
-    return limiter! == null ? owner : limiter!;
+    return limiter == null ? owner : limiter;
   }
 
   /* Utility method that creates a new vector.
@@ -122,7 +116,7 @@ abstract class SteeringBehavior extends Vector2 {
    *
    * @param location the location whose position is used to create the new vector
    * @return the newly created vector */
-  Vector2 newVector (Location location) {
+  VectorAI newVector (Location location) {
     return location.getPosition().cpy().setZero();
   }
 }
