@@ -41,7 +41,6 @@ class Alignment extends GroupBehavior implements VectorAI,ProximityCallback {
       // Match the average velocity.
       // Notice that steering.linear and averageVelocity are the same vector here.
       averageVelocity.sub(owner.getLinearVelocity()!);
-
       averageVelocity.limit(getActualLimiter().getMaxLinearAcceleration());
     }
 
