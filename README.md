@@ -15,7 +15,8 @@ This library tries to adapt [gdx-ai](https://github.com/libgdx/gdx-ai) to dart l
 
 ## Features
 
-TODO: 
+TODO:
+
 [ ] Movement AI
 
   [ ] Steering Behaviors
