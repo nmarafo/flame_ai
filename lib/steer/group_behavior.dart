@@ -10,7 +10,7 @@ import 'package:flame_ai/steer/steerable.dart';
 import 'package:flame_ai/steer/steering_behavior.dart';
 import 'package:flame_ai/utils/vector_ai.dart';
 
-abstract class GroupBehavior extends VectorAI implements SteeringBehavior {
+abstract class GroupBehavior extends SteeringBehavior implements VectorAI{
 
   /* The proximity decides which agents are considered neighbors. */
   late Proximity proximity;

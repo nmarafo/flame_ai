@@ -17,9 +17,9 @@ import 'package:flame_ai/steer/steerable.dart';
 import 'package:flame_ai/steer/steering_acceleration.dart';
 import 'package:flame_ai/utils/vector_ai.dart';
 
-class Alignment extends VectorAI implements GroupBehavior,ProximityCallback {
+class Alignment extends GroupBehavior implements VectorAI,ProximityCallback {
 
-  VectorAI averageVelocity;
+  late VectorAI averageVelocity;
 
   /* Creates an {@code Alignment} behavior for the specified owner and proximity.
    * @param owner the owner of this behavior

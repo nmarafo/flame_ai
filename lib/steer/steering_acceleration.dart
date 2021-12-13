@@ -7,6 +7,7 @@
  * @author davebaol */
 import 'dart:math';
 
+import 'package:flame/extensions.dart';
 import 'package:flame_ai/utils/vector_ai.dart';
 
 class SteeringAcceleration extends VectorAI {
@@ -31,7 +32,7 @@ class SteeringAcceleration extends VectorAI {
 
   /* Returns {@code true} if both linear and angular components of this steering acceleration are zero; {@code false} otherwise. */
   bool isZero () {
-    return angular == 0 && linear.isZero();
+    return angular == 0 && linear==Vector2(0,0);
   }
 
   /* Zeros the linear and angular components of this steering acceleration.
