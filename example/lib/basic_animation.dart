@@ -4,6 +4,8 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_ai_example/commons/ember.dart';
+import 'package:flame/effects.dart';
+
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart';
 
@@ -68,14 +70,25 @@ class BasicAnimationsExample extends FlameGame with TapDetector,KeyboardEvents {
         amountPerRow: 10,
         textureSize: size,
         stepTime: 0.15,
-        loop: false,
+        loop: true,
       ),
       size: size,
       removeOnFinish: false,
     );
 
     animationComponent.position = position - size / 2;
-    add(animationComponent);
+    add(animationComponent..add(
+      MoveEffect.to(
+        Vector2(380, 50),
+        EffectController(
+          duration: 3,
+          reverseDuration: 3,
+          infinite: true,
+          curve: Curves.easeOut,
+        ),
+      ),
+    ),
+    );
   }
 
   @override
