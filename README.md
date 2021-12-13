@@ -16,21 +16,33 @@ This library tries to adapt [gdx-ai](https://github.com/libgdx/gdx-ai) to dart l
 ## Features
 
 TODO: 
-[] Movement AI
-  [] Steering Behaviors
-  [] Formation Motion
-[] Pathfinding
-  [] A*
-  [] Hierarchical Pathfinding
-  [] Path Smoothing
-  [] Interruptible Pathfinding
-[] Decision Making
-  [] State Machine
-  [] Behavior Trees
-[] Infrastructure
-  [] Message Handling
-  [] Scheduling
-.
+[ ] Movement AI
+
+  [ ] Steering Behaviors
+
+  [ ] Formation Motion
+
+[ ] Pathfinding
+
+  [ ] A*
+
+  [ ] Hierarchical Pathfinding
+
+  [ ] Path Smoothing
+
+  [ ] Interruptible Pathfinding
+
+[ ] Decision Making
+
+  [ ] State Machine
+
+  [ ] Behavior Trees
+
+[ ] Infrastructure
+
+  [ ] Message Handling
+
+  [ ] Scheduling
 
 ## Getting started
 
