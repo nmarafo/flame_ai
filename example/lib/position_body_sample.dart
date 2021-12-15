@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/input.dart';
+import 'package:flame_ai/utils/location.dart';
+import 'package:flame_ai_example/ai/player_ai.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flame_forge2d/forge2d_game.dart';
 import 'package:flame_forge2d/position_body_component.dart';
@@ -13,7 +15,6 @@ import 'package:flutter/services.dart';
 
 import 'package:flame_ai_example/boundaries.dart';
 import 'package:flame_ai_example/commons/ember.dart';
-
 
 class ChopperBody extends PositionBodyComponent {
   final Vector2 position;
@@ -44,12 +45,14 @@ class ChopperBody extends PositionBodyComponent {
 
 class PlayerBody extends PositionBodyComponent {
   final Vector2 position;
+  late PlayerAI? ai;
 
   PlayerBody(
       this.position,
       PositionComponent component,
-      ) : super(positionComponent: component, size: component.size);
-  PlayerBody.alone(this.position);
+      ) : super(positionComponent: component, size: component.size){
+    ai;
+  }
 
   @override
   Body createBody() {
@@ -77,13 +80,14 @@ class PositionBodySample extends Forge2DGame with TapDetector,KeyboardEvents {
   late Image playerImage;
   late SpriteAnimation animation;
   late SpriteAnimation playerAnimation;
-  late Body bodyPlayer;
-  late PlayerBody playerBody;
+  //late Body bodyPlayer;
+  late PlayerBody player;
   //late final Ember ember;
+  late Location playerLocation;
 
   PositionBodySample() : super(gravity: Vector2.zero());
 
-  final Vector2 velocity = Vector2(0, 0);
+  //final Vector2 velocity = Vector2(0, 0);
 
   @override
   Future<void> onLoad() async {
@@ -123,14 +127,16 @@ class PositionBodySample extends Forge2DGame with TapDetector,KeyboardEvents {
       size: Vector2.all(10),
     );
 
-    playerBody=PlayerBody(Vector2.zero(), playerAnimationComponent);
-    add(playerBody);
+    player=PlayerBody(Vector2.zero(),playerAnimationComponent);
+    player.ai=PlayerAI(player.body);
+    add(player);
+    playerLocation=player.ai!;
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    final displacement = velocity * (speed * dt);
+    //final displacement = velocity * (speed * dt);
     //ember.position.add(displacement);
   }
 
@@ -155,13 +161,13 @@ class PositionBodySample extends Forge2DGame with TapDetector,KeyboardEvents {
 
     if (event.logicalKey == LogicalKeyboardKey.keyA) {
       //velocity.x = isKeyDown ? -1 : 0;
-     playerBody.body.applyLinearImpulse(Vector2(-40.0,0.0));
+     player.body.applyLinearImpulse(Vector2(-40.0,0.0));
     } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
-      playerBody.body.applyLinearImpulse(Vector2(40.0,0.0));
+      player.body.applyLinearImpulse(Vector2(40.0,0.0));
     } else if (event.logicalKey == LogicalKeyboardKey.keyW) {
-      playerBody.body.applyLinearImpulse(Vector2(0.0,40.0));
+      player.body.applyLinearImpulse(Vector2(0.0,40.0));
     } else if (event.logicalKey == LogicalKeyboardKey.keyS) {
-      playerBody.body.applyLinearImpulse(Vector2(0.0,-40.0));
+      player.body.applyLinearImpulse(Vector2(0.0,-40.0));
     }
 
     return super.onKeyEvent(event, keysPressed);
