@@ -11,8 +11,8 @@ class PlayerAI extends Location {
   PlayerAI(this.body) ;
 
   @override
-  VectorAI getPosition() {
-    return body.position as VectorAI;
+  Vector2 getPosition() {
+    return body.position;
   }
 
   @override

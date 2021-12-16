@@ -45,14 +45,11 @@ class ChopperBody extends PositionBodyComponent {
 
 class PlayerBody extends PositionBodyComponent {
   final Vector2 position;
-  late PlayerAI? ai;
 
   PlayerBody(
       this.position,
       PositionComponent component,
-      ) : super(positionComponent: component, size: component.size){
-    ai;
-  }
+      ) : super(positionComponent: component, size: component.size);
 
   @override
   Body createBody() {
@@ -80,7 +77,6 @@ class PositionBodySample extends Forge2DGame with TapDetector,KeyboardEvents {
   late Image playerImage;
   late SpriteAnimation animation;
   late SpriteAnimation playerAnimation;
-  //late Body bodyPlayer;
   late PlayerBody player;
   //late final Ember ember;
   late Location playerLocation;
@@ -128,14 +124,17 @@ class PositionBodySample extends Forge2DGame with TapDetector,KeyboardEvents {
     );
 
     player=PlayerBody(Vector2.zero(),playerAnimationComponent);
-    player.ai=PlayerAI(player.body);
+
     add(player);
-    playerLocation=player.ai!;
+    //playerLocation=PlayerAI(world.bodies.length-1);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
+    playerLocation=PlayerAI(player.body);
+    print(playerLocation.getPosition());
+    //print(world.bodies.length);
     //final displacement = velocity * (speed * dt);
     //ember.position.add(displacement);
   }
